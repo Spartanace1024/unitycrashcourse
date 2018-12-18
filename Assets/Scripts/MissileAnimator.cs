@@ -5,7 +5,7 @@ public class MissileAnimator : MonoBehaviour {
     public ThrustController thrustController;
     public CollisionBroadcaster collisionBroadcaster;
     public ParticleSystem exhaustParticles;
-
+    public GameObject explode;
     // Start is called before the first frame update
     void Start() {
         collisionBroadcaster.OnCollision += Explode;
@@ -23,7 +23,11 @@ public class MissileAnimator : MonoBehaviour {
     }
 
     private void Explode(GameObject enemy) {
+        Instantiate(explode, transform.position, Quaternion.identity);
+        Destroy(gameObject);
+        /*
         missileAnimator.SetTrigger("trigExplode");
         exhaustParticles.Stop();
+        */
     }
 }
