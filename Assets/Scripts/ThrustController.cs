@@ -36,12 +36,10 @@ public class ThrustController : MonoBehaviour {
         
         if (horizontalInput > 0) {
             _rigidbody2D.AddForceAtPosition(leftForcePosition.up*turnForce,leftForcePosition.position);
-            Debug.Log("Turning Right");
         }
         
         if (horizontalInput < 0) {
             _rigidbody2D.AddForceAtPosition(rightForcePosition.up*turnForce,rightForcePosition.position);
-            Debug.Log("Turning Left");
         }
     }
 

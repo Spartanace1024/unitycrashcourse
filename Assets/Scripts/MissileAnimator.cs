@@ -3,16 +3,16 @@
 public class MissileAnimator : MonoBehaviour {
     public Animator missileAnimator;
     public ThrustController thrustController;
-    public CollisionBroadcaster collisionBroadcaster;
-    public ParticleSystem exhaustParticles;
+    public CollisionEnterBroadcaster collisionEnterBroadcaster;
     public GameObject explode;
+    
     // Start is called before the first frame update
     void Start() {
-        collisionBroadcaster.OnCollision += Explode;
+        collisionEnterBroadcaster.OnCollisionEnter += Explode;
     }
 
     private void OnDisable() {
-        collisionBroadcaster.OnCollision -= Explode;
+        collisionEnterBroadcaster.OnCollisionEnter -= Explode;
     }
 
     // Update is called once per frame
@@ -22,12 +22,8 @@ public class MissileAnimator : MonoBehaviour {
         missileAnimator.SetBool("isBoosting",thrustController.IsBoosting);
     }
 
-    private void Explode(GameObject enemy) {
+    private void Explode(Collision2D enemy) {
         Instantiate(explode, transform.position, Quaternion.identity);
         Destroy(gameObject);
-        /*
-        missileAnimator.SetTrigger("trigExplode");
-        exhaustParticles.Stop();
-        */
     }
 }
