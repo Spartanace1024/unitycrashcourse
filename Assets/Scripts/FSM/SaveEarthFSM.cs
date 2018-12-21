@@ -3,11 +3,14 @@ using UnityEngine.UI;
 
 public class SaveEarthFSM : MonoBehaviour {
     public GameObject missile;
+    public GameObject goalMeteor;
     public GameObject boundsCamera;
     public Button launchButton;
     public Button restartButton;
+    public Button quitButton;
     public GameObject startMenu;
-    public GameObject endMenu;
+    public GameObject loseMenu;
+    public GameObject winMenu;
     
     private SaveEarthState currentState;
 

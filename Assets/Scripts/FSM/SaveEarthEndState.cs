@@ -1,16 +1,26 @@
 ﻿using UnityEngine.SceneManagement;
 using UnityEngine;
+
 public class SaveEarthEndState : SaveEarthState {
-    private GameObject endMenu;
+    private GameObject loseMenu;
+    private GameObject winMenu;
     private bool isWinner;
+    
     public SaveEarthEndState(bool isWinner) {
         this.isWinner = isWinner;
     }
     
     public override void OnStateEnter(SaveEarthFSM fsm) {
         fsm.restartButton.onClick.AddListener(RestartGame);
-        endMenu = fsm.endMenu;
-        endMenu.SetActive(true);
+        fsm.quitButton.onClick.AddListener(RestartGame);
+        winMenu = fsm.winMenu;
+        loseMenu = fsm.loseMenu;
+        
+        if (isWinner) {
+            winMenu.SetActive(true);
+        } else {
+            loseMenu.SetActive(true);   
+        }
     }
 
     public override void OnStateUpdate(SaveEarthFSM fsm) {
@@ -19,7 +29,7 @@ public class SaveEarthEndState : SaveEarthState {
 
     public override void OnStateExit(SaveEarthFSM fsm) {
         fsm.restartButton.onClick.RemoveListener(RestartGame);
-
+        fsm.quitButton.onClick.AddListener(RestartGame);
     }
 
     private void RestartGame() {
